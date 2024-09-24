@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "y"
+version = "0.1.0"
+description = ""
+authors = ["Khizar"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+langchain-openai = "^0.2.0"
+langchain = "^0.3.0"
+langchain-community = "^0.3.0"
+google-generativeai = "0.7.1"
+langchain-google-genai = "^2.0.0"
+ipykernel = "^6.29.5"
+python-dotenv = "^1.0.1"
+fastapi = "^0.115.0"
+uvicorn = "^0.30.6"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
