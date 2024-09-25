@@ -18,7 +18,7 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 load_dotenv()
-API_KEY = "8f7419767519cc63cbb44e192b8cce60"  # Replace with your OpenWeatherMap API key
+API_KEY = os.getenv("OPEN_WEATHER_API_KEY")
 class CityRequest(BaseModel):
     city: str
 
