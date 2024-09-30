@@ -8,6 +8,7 @@ requests==2.32.3
 starlette==0.38.6
 uvicorn==0.30.6
 langchain-google-genai
+google-generativeai
 python-dotenv
 langchain-community
 mangum
