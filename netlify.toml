@@ -1,0 +1,9 @@
+[build]
+  functions = "netlify/functions"
+  command = "pip install -r requirements.txt -t netlify/functions && echo 'Build completed'"
+  publish = "public"
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/main"
+  status = 200

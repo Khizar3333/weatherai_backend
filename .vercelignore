@@ -1,0 +1,9 @@
+
+agents.py
+agents.ipynb
+ __pycache__/
+   *.pyc
+   *.pyo
+   *.pyd
+ pyproject.toml
+ poetry.lock  
