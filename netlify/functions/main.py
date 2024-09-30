@@ -21,7 +21,7 @@ app = FastAPI()
 handler = Mangum(app)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow your Next.js frontend
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],  # Allow all methods (GET, POST, etc.)
     allow_headers=["*"],  # Allow all headers
@@ -72,7 +72,7 @@ def get_weather(city: str) -> str:
 
 
 
-# Existing code for loading documents and creating the retriever
+
 loader = WebBaseLoader("https://portfolio2-lime-alpha.vercel.app/")
 docs = loader.load()
 documents = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200).split_documents(docs)
