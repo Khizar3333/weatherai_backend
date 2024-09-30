@@ -1,6 +1,10 @@
 [build]
   functions = "netlify/functions"
-  command = "pip install -r requirements.txt -t netlify/functions && echo 'Build completed'"
+  command = """
+    poetry export -f requirements.txt --without-hashes -o requirements.txt &&
+    pip install -r requirements.txt -t netlify/functions &&
+    echo 'Build completed'
+  """
   publish = "public"
 
 [[redirects]]
