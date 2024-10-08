@@ -15,6 +15,7 @@ import os
 from langchain import hub
 from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.runnables.history import RunnableWithMessageHistory
+from langchain_core.prompts import ChatPromptTemplate
 from mangum import Mangum
 
 app = FastAPI()
@@ -82,17 +83,33 @@ retriever = vectorstore.as_retriever()
 # Create the retriever tool without using @tool directive
 retriever_tool = create_retriever_tool(retriever,
                                         "Khizar_Ahmad",
-                                        "Search for information about Khizar Ahmad. For any question about Khizar Ahmad you must use this tool"
+                                        """Search for information about Khizar Ahmad. if user ask  any question related to Khizar Ahmad you must use this tool
+                                         and even if you dont know the answer or if user ask something related to khizar ahmad which you dont know even then give some information which you have an access.Any user question related to 
+                                          to khizar you must entertain the user and use this tool ."""
+                                
                                     )
 
 
 
 tools=[get_weather, retriever_tool]
-prompt=hub.pull("hwchase17/openai-functions-agent")
+# prompt=hub.pull("hwchase17/openai-functions-agent")
+
+
+# ... existing code ...
+prompt = ChatPromptTemplate([
+    ("You are a helpful assistant who only provides answers related to weather and "
+    "Khizar Ahmad. Please respond to the user's questions based on this context and if user ask question which is not"
+    "related to khizar ahmad then you must answer it as you are a helpful assistant who only provides answers related to weather and "
+    "Use the following scratchpad for any intermediate information: {agent_scratchpad}"),
+    
+    ("human", "{input}"),
+])
+
 agent=create_tool_calling_agent(llm,tools,prompt)
 
 agent_executor=AgentExecutor.from_agent_and_tools(agent,tools,verbose=True)
 message_history=ChatMessageHistory()
+
 
 agent_with_chat_history = RunnableWithMessageHistory(
     agent_executor,
@@ -116,5 +133,7 @@ async def answer_query(request: QueryRequest):
         return {"response": response}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
 
 
