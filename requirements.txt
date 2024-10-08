@@ -8,3 +8,4 @@ fastapi
 uvicorn
 bs4
 mangum
+faiss-cpu
